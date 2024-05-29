@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoutes from "./routes/user_route.js";
 import authRoutes from "./routes/auth_route.js";
-import { errorHandler } from "./middleware/error.js";
+import { errorHandler, customErrorHandler } from "./middleware/error.js";
 dotenv.config();
 
 const app = express();
@@ -16,6 +16,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 
 app.use(errorHandler);
+app.use(customErrorHandler);
 
 mongoose
   .connect(process.env.MONGO)
